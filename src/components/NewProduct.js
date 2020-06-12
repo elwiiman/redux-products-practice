@@ -1,6 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+//redux actions
+import { createNewProductAction } from "../actions/productActions";
+
+//
 
 const NewProduct = () => {
+  //local state
+  const [product, setProduct] = useState({
+    name: "",
+    price: "",
+  });
+
+  const handleChange = (e) => {
+    setProduct({ ...product, [e.target.name]: e.target.value });
+  };
+
+  //using useDispatch which return a function
+  const dispatch = useDispatch();
+
+  //function to add product by calling the action function
+  const addProduct = (product) => dispatch(createNewProductAction(product));
+
+  // when user submits new product executes
+  const submitNewProduct = (e) => {
+    e.preventDefault();
+
+    //validate form
+    if (product.name.trim() === "" || product.price.trim() <= 0) {
+      return;
+    }
+    //check if errors
+
+    //add a new product
+    addProduct(product);
+  };
   return (
     <div className="row justify-content-center">
       <div className="col-md-8">
@@ -10,7 +44,7 @@ const NewProduct = () => {
               Add New Product
             </h2>
 
-            <form>
+            <form onSubmit={submitNewProduct}>
               <div className="form-group">
                 <label>Product Name</label>
                 <input
@@ -18,6 +52,8 @@ const NewProduct = () => {
                   className="form-control"
                   placeholder="Product Name"
                   name="name"
+                  value={product.name}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group">
@@ -27,6 +63,8 @@ const NewProduct = () => {
                   className="form-control"
                   placeholder="Product Price"
                   name="price"
+                  value={product.price}
+                  onChange={handleChange}
                 />
               </div>
               <button
