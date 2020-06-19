@@ -5,7 +5,7 @@ import { createNewProductAction } from "../actions/productActions";
 
 //
 
-const NewProduct = () => {
+const NewProduct = ({ history }) => {
   //local state
   const [product, setProduct] = useState({
     name: "",
@@ -38,7 +38,11 @@ const NewProduct = () => {
 
     //add a new product
     addProduct(product);
+
+    //redirect to home
+    history.push("/");
   };
+
   return (
     <div className="row justify-content-center">
       <div className="col-md-8">
