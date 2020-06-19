@@ -29,6 +29,16 @@
       "name": "Rib Eye",
       "price": "2000",
       "id": 6
+    },
+    {
+      "name": "Primera Tarea",
+      "price": "15000",
+      "id": 7
+    },
+    {
+      "name": "Rib Eye",
+      "price": "2000",
+      "id": 8
     }
   ]
 }

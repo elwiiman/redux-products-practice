@@ -12,12 +12,16 @@ const NewProduct = () => {
     price: "",
   });
 
+  //using useDispatch which return a function
+  const dispatch = useDispatch();
+
+  //access to store state
+  const loading = useSelector((state) => state.products.loading);
+  const error = useSelector((state) => state.products.error);
+
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
-
-  //using useDispatch which return a function
-  const dispatch = useDispatch();
 
   //function to add product by calling the action function
   const addProduct = (product) => dispatch(createNewProductAction(product));
@@ -74,6 +78,12 @@ const NewProduct = () => {
                 Add
               </button>
             </form>
+            {loading ? <p>Loading...</p> : null}
+            {error ? (
+              <p className="alert alert-danger p-2 mt-4 text-center">
+                There was an error
+              </p>
+            ) : null}
           </div>
         </div>
       </div>
