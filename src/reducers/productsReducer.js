@@ -8,6 +8,7 @@ import {
   OBTAIN_PRODUCT_TO_DELETE,
   PRODUCT_DELETED_SUCCESS,
   PRODUCT_DELETED_ERROR,
+  OBTAIN_PRODUCT_TO_EDIT,
 } from "../types";
 
 // each reducer has his own state
@@ -17,6 +18,7 @@ const initialState = {
   error: null,
   loading: false,
   productToDelete: null,
+  productToEdit: null,
 };
 
 export default function (state = initialState, action) {
@@ -61,6 +63,11 @@ export default function (state = initialState, action) {
           (product) => product.id !== state.productToDelete
         ),
         productToDelete: null,
+      };
+    case OBTAIN_PRODUCT_TO_EDIT:
+      return {
+        ...state,
+        productToEdit: action.payload,
       };
 
     default:
