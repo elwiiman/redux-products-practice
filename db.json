@@ -1,14 +1,14 @@
 {
   "products": [
     {
-      "id": 2,
-      "name": "Jugo de Naranja",
-      "price": "1"
+      "name": "Jugo de Naranja Premium",
+      "price": "689",
+      "id": 3
     },
     {
-      "name": "Jugo de Naranja",
-      "price": "300",
-      "id": 3
+      "name": "Rib Eye",
+      "price": "1568",
+      "id": 4
     }
   ]
 }

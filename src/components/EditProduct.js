@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { editProductAction } from "../actions/productActions";
+import { useHistory } from "react-router-dom";
 
 const EditProduct = () => {
-  const dispatch = useDispatch();
+  //new state
+  const [product, setProduct] = useState({
+    name: "",
+    price: "",
+  });
 
-  const product = useSelector((state) => state.products.productToEdit);
-  if (!product) return null;
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const productToEdit = useSelector((state) => state.products.productToEdit);
   const { name, price, id } = product;
+
+  //fill state automatically
+  useState(() => {
+    setProduct(productToEdit);
+  }, [productToEdit]);
+
+  //read data form the form
+  const handleChange = (e) => {
+    setProduct({ ...product, [e.target.name]: e.target.value });
+  };
+
+  const submitEditedProduct = (e) => {
+    e.preventDefault();
+    dispatch(editProductAction(product));
+    history.push("/");
+  };
+
   return (
     <div className="row justify-content-center">
       <div className="col-md-8">
@@ -14,7 +38,7 @@ const EditProduct = () => {
           <div className="card-body">
             <h2 className="text-center mb-4 font-weight-bold">Edit Product</h2>
 
-            <form>
+            <form onSubmit={submitEditedProduct}>
               <div className="form-group">
                 <label>Product Name</label>
                 <input
@@ -22,7 +46,8 @@ const EditProduct = () => {
                   className="form-control"
                   placeholder="Product Name"
                   name="name"
-                  defaultValue={name}
+                  value={name}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group">
@@ -32,7 +57,8 @@ const EditProduct = () => {
                   className="form-control"
                   placeholder="Product Price"
                   name="price"
-                  defaultValue={price}
+                  value={price}
+                  onChange={handleChange}
                 />
               </div>
               <button

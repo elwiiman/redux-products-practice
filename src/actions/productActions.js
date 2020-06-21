@@ -9,6 +9,7 @@ import {
   PRODUCT_DELETED_SUCCESS,
   PRODUCT_DELETED_ERROR,
   OBTAIN_PRODUCT_TO_EDIT,
+  START_EDIT_PRODUCT,
   PRODUCT_EDITED_SUCCESS,
   PRODUCT_EDITED_ERROR,
 } from "../types";
@@ -131,4 +132,32 @@ export function obtainProductToEditAction(product) {
 const obtainProductToEdit = (product) => ({
   type: OBTAIN_PRODUCT_TO_EDIT,
   payload: product,
+});
+
+//edit a register in the API
+export function editProductAction(product) {
+  return async (dispatch) => {
+    dispatch(editProduct(product));
+    try {
+      await axiosClient.put(`products/${product.id}`, product);
+      dispatch(editProductSuccess(product));
+    } catch (error) {
+      console.log(error);
+      dispatch(editProductError());
+    }
+  };
+}
+
+const editProduct = () => ({
+  type: START_EDIT_PRODUCT,
+});
+
+const editProductSuccess = (product) => ({
+  type: PRODUCT_EDITED_SUCCESS,
+  payload: product,
+});
+
+const editProductError = () => ({
+  type: PRODUCT_EDITED_ERROR,
+  payload: true,
 });
