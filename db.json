@@ -2,13 +2,23 @@
   "products": [
     {
       "name": "Jugo de Naranja Premium",
-      "price": "689",
+      "price": "140",
       "id": 3
     },
     {
       "name": "Rib Eye",
       "price": "1568",
       "id": 4
+    },
+    {
+      "name": "Lemons",
+      "price": "120",
+      "id": 5
+    },
+    {
+      "name": "Apples",
+      "price": "120",
+      "id": 6
     }
   ]
 }

@@ -7,16 +7,17 @@ import Product from "../components/Product";
 const Products = () => {
   const dispatch = useDispatch();
 
+  const products = useSelector((state) => state.products.products);
+  const error = useSelector((state) => state.products.error);
+  const loading = useSelector((state) => state.products.loading);
+
   useEffect(() => {
     //consult API
 
     const loadProducts = () => dispatch(obtainProductsAction());
     loadProducts();
+    // eslint-disable-next-line
   }, []);
-
-  const products = useSelector((state) => state.products.products);
-  const error = useSelector((state) => state.products.error);
-  const loading = useSelector((state) => state.products.loading);
 
   return (
     <Fragment>
